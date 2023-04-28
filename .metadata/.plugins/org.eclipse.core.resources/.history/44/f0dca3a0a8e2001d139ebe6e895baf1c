@@ -1,0 +1,112 @@
+package ui;
+
+import java.awt.EventQueue;
+
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import bus.chitiethoadon_bus;
+import connectDB.ConnectDB;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.awt.Color;
+
+public class ChiTietHoaDon {
+
+	private JFrame frame;
+	private JTable table;
+	private static DefaultTableModel model;
+	private static chitiethoadon_bus cthd_bus;
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChiTietHoaDon window = new ChiTietHoaDon();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public ChiTietHoaDon() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		try {
+			ConnectDB.getInstance().connect();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 255, 255));
+		frame.setBounds(100, 100, 1000, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(null);
+		cthd_bus = new chitiethoadon_bus();
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(10, 11, 964, 107);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("CHI TIẾT HÓA ĐƠN");
+		lblNewLabel.setBackground(Color.LIGHT_GRAY);
+		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 944, 85);
+		panel.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 137, 964, 513);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 944, 491);
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel( model =new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"M\u00E3 CTHD", "M\u00E3 H\u00F3a \u0110\u01A1n", "M\u00E3 Tour", "S\u1ED1 l\u01B0\u1EE3ng Kh\u00E1ch", "\u0110\u01A1n Gi\u00E1", "Th\u00E0nh Ti\u1EC1n"
+			}
+		));
+		scrollPane.setViewportView(table);
+		DocDuLieuTrenTable();
+	}
+	private static void DocDuLieuTrenTable() {
+		ArrayList<entity.ChiTietHoaDon> list = cthd_bus.getAllCTHoaDon();
+		for(entity.ChiTietHoaDon ct: list) {
+			model.addRow(new Object[] {
+					ct.getMaCTHD(),ct.getMaHD(),ct.getMaTour(),ct.getSoLuongKhach(),ct.getDonGia(),ct.getThanhTien()
+			} );
+		}
+	}
+	
+}

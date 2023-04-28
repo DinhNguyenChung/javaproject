@@ -1,0 +1,8 @@
+package Interface;
+
+import java.util.ArrayList;
+import entity.ThongKe;
+
+public interface InThongKe {
+	public ArrayList<ThongKe> getAllThongKe();
+}

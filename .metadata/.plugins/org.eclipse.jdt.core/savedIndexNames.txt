@@ -1,0 +1,8 @@
+INDEX VERSION 1.132+F:\DeAnJaVa\.metadata\.plugins\org.eclipse.jdt.core
+172232834.index
+246459210.index
+1865797976.index
+1713681988.index
+3744976323.index
+3708945145.index
+547621158.index
