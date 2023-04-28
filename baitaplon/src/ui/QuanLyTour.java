@@ -414,11 +414,18 @@ public class QuanLyTour extends JFrame implements MouseListener {
 		table.addMouseListener(this);
 	}
 
+//	public void DocDuLieuTuDB() {
+//		List<Tour> list = tour_bus.getalltbTour();
+//		for (Tour tour : list) {
+//			model.addRow(new Object[] { tour.getMaTour(), tour.getTenTour(), tour.getDiadiemden(),
+//					tour.getNgaykhoihanh(), tour.getNgaykethuc(), tour.getGiatien(), tour.getSoluong() });
+//		}
+//	}
 	public void DocDuLieuTuDB() {
 		List<Tour> list = tour_bus.getalltbTour();
 		for (Tour tour : list) {
 			model.addRow(new Object[] { tour.getMaTour(), tour.getTenTour(), tour.getDiadiemden(),
-					tour.getNgaykhoihanh(), tour.getNgaykethuc(), tour.getGiatien(), tour.getSoluong() });
+					tour.getNgaykhoihanh(), tour.getNgaykethuc(), tour.getSoluong(), tour.getGiatien() });
 		}
 	}
 	public void XoaRong() {

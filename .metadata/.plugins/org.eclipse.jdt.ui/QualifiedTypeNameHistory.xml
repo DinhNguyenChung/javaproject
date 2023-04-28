@@ -15,7 +15,6 @@
     <fullyQualifiedTypeName name="Interface.InThongKe"/>
     <fullyQualifiedTypeName name="bus.thongke_bus"/>
     <fullyQualifiedTypeName name="entity.ThongKe"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="dao.ThongKe_DAO"/>
     <fullyQualifiedTypeName name="ui.TrangChu"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
@@ -26,4 +25,5 @@
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="ui.ThongKe"/>
     <fullyQualifiedTypeName name="ui.HoaDon"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
 </qualifiedTypeNameHistroy>

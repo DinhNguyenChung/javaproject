@@ -23,6 +23,7 @@ import java.awt.SystemColor;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -202,9 +203,9 @@ public class ThongKe {
 	}
 	
 	private static void DocDuLieu() {
-		ArrayList<entity.ThongKe> list = tk_bus.getAllThongKe();
-		for(entity.ThongKe tk:list) {
-			model.addRow(new Object[] {tk.getTentour(),tk.getSolandat(),tk.getSolandi(),tk.getGiatour(),tk.getTongtien()});
+		ArrayList<Object[]> list = tk_bus.getAllThongKe();
+		for(Object[] tk:list) {
+			model.addRow(tk);
 		}
 	}
 	private static void XoaDuLieutrenModel() {
@@ -225,31 +226,31 @@ public class ThongKe {
 		}
 		
 		if(ngayBD==null && ngayKT ==null) {
-			ArrayList<entity.ThongKe> list = tk_bus.getAllThongKe();
-			for(entity.ThongKe tk:list) {
-				sum+=tk.getTongtien();
+			ArrayList<Object[]> list = tk_bus.getAllThongKe();
+			for(Object[] tk:list) {
+				sum+= (double)tk[4];
 			}
 		}
 		if(ngayBD!=null && ngayKT !=null) {
 			
-			 ArrayList<entity.ThongKe> list = tk_bus.getThongKeTheo2ngay(ngayBD, ngayKT);
-			for(entity.ThongKe tk:list) {
-				sum+=tk.getTongtien();
+			ArrayList<Object[]>  list = tk_bus.getThongKeTheo2ngay(ngayBD, ngayKT);
+			for(Object[] tk:list) {
+				sum+= (double)tk[4];
 			}
 		}
 		if(ngayBD!=null && ngayKT ==null) {
 			XoaDuLieutrenModel();
-			 ArrayList<entity.ThongKe>list = tk_bus.getThongKeTheoNgayBD(ngayBD);
-			for(entity.ThongKe tk:list) {
-				sum+=tk.getTongtien();
+			ArrayList<Object[]> list = tk_bus.getThongKeTheoNgayBD(ngayBD);
+			for(Object[] tk:list) {
+				sum+= (double)tk[4];
 			}
 		}
 		if(ngayBD==null && ngayKT !=null) {
 			
-			 ArrayList<entity.ThongKe> list = tk_bus.getThongKeTheoNgayKT(ngayKT);
-			for(entity.ThongKe tk:list) {
-				sum+=tk.getTongtien();
-			}
+			ArrayList<Object[]> list = tk_bus.getThongKeTheoNgayKT(ngayKT);
+			 for(Object[] tk:list) {
+					sum+= (double)tk[4];
+				}
 		}
 		return sum;
 	}
@@ -265,7 +266,7 @@ public class ThongKe {
 				ngayBD=null;
 				ngayKT=null;
 			}
-			 ArrayList<entity.ThongKe> list = new ArrayList<>();
+			 ArrayList<Object[]> list = new ArrayList<>();
 			
 			if(ngayBD==null && ngayKT ==null) {
 				XoaDuLieutrenModel();
@@ -274,22 +275,22 @@ public class ThongKe {
 			if(ngayBD!=null && ngayKT !=null) {
 				XoaDuLieutrenModel();
 				 list = tk_bus.getThongKeTheo2ngay(ngayBD, ngayKT);
-				for(entity.ThongKe tk:list) {
-					model.addRow(new Object[] {tk.getTentour(),tk.getSolandat(),tk.getSolandi(),tk.getGiatour(),tk.getTongtien()});
-				}
+				 for(Object[] tk:list) {
+						model.addRow(tk);
+					}
 			}
 			if(ngayBD!=null && ngayKT ==null) {
 				XoaDuLieutrenModel();
 				 list = tk_bus.getThongKeTheoNgayBD(ngayBD);
-				for(entity.ThongKe tk:list) {
-					model.addRow(new Object[] {tk.getTentour(),tk.getSolandat(),tk.getSolandi(),tk.getGiatour(),tk.getTongtien()});
-				}
+				 for(Object[] tk:list) {
+						model.addRow(tk);
+					}
 			}
 			if(ngayBD==null && ngayKT !=null) {
 				XoaDuLieutrenModel();
 				list = tk_bus.getThongKeTheoNgayKT(ngayKT);
-				for(entity.ThongKe tk:list) {
-					model.addRow(new Object[] {tk.getTentour(),tk.getSolandat(),tk.getSolandi(),tk.getGiatour(),tk.getTongtien()});
+				for(Object[] tk:list) {
+					model.addRow(tk);
 				}
 			}
 			if(list ==null) {
